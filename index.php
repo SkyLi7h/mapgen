@@ -30,7 +30,7 @@ $DB_ACCESS = "MYSQL"; //Type d'accès aux données
 $HOST = "localhost";
 $DBNAME = "feudalism";
 $LOGIN = "root";
-$PASS = "19Nino552886!";
+$PASS = "0!";
 
 $bdd = new PDO('mysql:host='.$HOST.';dbname='.$DBNAME.';charset=utf8', $LOGIN, $PASS);
 $reponse = $bdd->query('SELECT * FROM carte');
