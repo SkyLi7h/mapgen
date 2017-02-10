@@ -1,0 +1,111 @@
+<html charset="utf-8">
+	<head>
+		<style  type="text/css">
+			#divMap
+			{
+				overflow: auto;
+				width: 100%;
+				height: 95%;
+			}
+			#tableCarte
+			{	
+				overflow-x: scroll;
+				overflow-y: scroll;
+			}
+			
+			#tableCarte tr
+			{	
+				min-width: 50px;
+			}
+			
+			#tableCarte td
+			{
+				height: 64px;
+				min-width: 64px;
+				border: 1px solid black;
+				background-color: green;
+			}
+		
+		</style>
+	
+	</head>
+	<body>
+		<script>
+			var xSelected, ySelected = null;
+			var carte = [];
+		
+			function genererCarte()
+			{
+				var tailleX = document.getElementById("x").value;
+				var tailleY = document.getElementById("y").value;
+				var tableCarte = "<table id='tableCarte'>";
+				
+				for(var y = 0; y < tailleY; y++)
+				{
+					tableCarte += "<tr>";
+					carte[y+1] = [];
+					
+					for(var x = 0; x < tailleX; x++)
+					{
+						carte[y+1][x+1] = null;
+						tableCarte += "<td onClick='selectTile("+ (x+1) +","+ (y+1) +")' id='x"+(x+1)+"y"+(y+1)+"'></td>";
+					}
+					
+					tableCarte += "</tr>";
+				
+				}
+				
+				
+				tableCarte += "</table>";
+
+				console.log(tableCarte);
+				document.getElementById("divMap").innerHTML = tableCarte;		
+			}
+			
+			function selectTile(x, y)
+			{
+				if(xSelected != null)
+					document.getElementById("x"+xSelected+"y"+ySelected).style.border="";
+					
+				xSelected = x;
+				ySelected = y;
+				document.getElementById("x"+xSelected+"y"+ySelected).style.border="3px inset red";
+			}
+			
+			function montagne()
+			{
+				document.getElementById("x"+xSelected+"y"+ySelected).style.backgroundImage="URL('img/mountains.png')";
+				carte[ySelected][xSelected] = "montagne";
+			}
+			
+			function plaine()
+			{
+				document.getElementById("x"+xSelected+"y"+ySelected).style.backgroundImage="URL('img/plains.png')";
+				carte[ySelected][xSelected] = "plaine";
+			}
+			
+			function foret()
+			{
+				document.getElementById("x"+xSelected+"y"+ySelected).style.backgroundImage="URL('img/forest.png')";
+				carte[ySelected][xSelected] = "foret";
+			}
+			
+			
+			
+
+		</script>
+
+		<input type="text" id="x"/>
+		<input type="text" id="y"/>
+		<input type="submit" value="generer" onClick="genererCarte()"/>
+		<input type="submit" value="montagne" onClick="montagne()"/>
+		<input type="submit" value="plaine" onClick="plaine()"/>
+		<input type="submit" value="foret" onClick="foret()"/>
+		<div id="divMap">
+		
+		
+		</div>
+	</body>
+</html>
+
+
